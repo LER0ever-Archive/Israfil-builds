@@ -1,4 +1,7 @@
 os: unstable
+branches:
+  only:
+    - master
 #atrix:
 # - build: msvc2015
 #   QTDIR:
@@ -10,6 +13,8 @@ install:
  - set PATH=%PATH%;C:\Qt\5.5\mingw492_32\bin;C:\Qt\Tools\mingw492_32\bin
 build_script:
 # - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
+ - git clone https://github.com/LER0ever/Israfil.git
+ - cd Israfil
  - 'echo Downloading Slibcurl ...'
  - appveyor DownloadFile https://curl.haxx.se/download/curl-7.49.1.zip -FileName curl.zip
  - 7z x curl.zip
@@ -25,6 +30,8 @@ build_script:
  - md build-mingw
  - cd build-mingw
  - qmake ..\Israfil.pro
+ - for /f  %%i  in (..\..\VERSION) do (set VERSION_NUMBER=%%i)
+ - echo VERSION_NUMBER
  - mingw32-make
  - echo 'moving files to artifacts'
 # - move lib\* bin\
@@ -41,11 +48,23 @@ build_script:
  - ren bin Israfil
  - cd Israfil
  - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+ - set GIT_TAG="Windows-g++"+%VERSION_NUMBER
+ - git tag $GIT_TAG -a -m "Generated tag from Appveyor"
+ - git push -q https://LER0ever:%GITHUB_API_KEY@github.com/LER0ever/Israfil-builds --tags
 # - windeployqt test-json.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-qqmusic.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml
    # - cd release
 # - windeployqt --release HelloWorld.exe
 artifacts:
-  - path: build-mingw
+  - path: Israfil\build-mingw
     name: Israfil
+deploy:
+  # Deploy to GitHub Releases
+  - provider: GitHub
+    artifact: Israfil
+    draft: false
+    prerelease: false
+    auth_token: %GITHUB_API_KEY
+    on:
+      branch: master
