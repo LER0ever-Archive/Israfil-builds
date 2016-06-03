@@ -12,9 +12,10 @@ os:
 
 env:
     global:
-        -secure: "QuhX7bisRDa+sUluH9W3II5z8mawlhWjw4sHmgwDgdLC3EZNcZMSRLDzMuQVkMAUVRLJzwa2NYq8b/pO0f5vLcZHiFudtMJyy4+RgSP1aJv6Uz68cHH3EaMc7x95XBBtvFaunZZ4meSNM6kwzHwFWFievd2n14R461QMrPAIX1I69SPYRjiVAgqnXBGIPYNi8iOW70/+uvOl6fVIc4cSiVXi7JpIbQI3jvJFlJ3DcrJGn7gwH2VUbudwaSMeivrRaBH23w2rYbp2Y13qyfb1t3j8i0zWN3eqPRS+oaEBKvQ2KMbEJQxPAa7ZdxkwuReUZwVw8dJOmgzNSl8GY1QNfyijMh/hwG3AacelW1NCRl6Z8g1xr8xn0ZUmQOs5t1iYz+wHXNgyea22x8E8B9QP/pCP37MeW8Wm0yVm6ShqnsWx6AvVKSKV3UtAZaWhK0SM4lXe9ZTEPhYb62OP5upg1gqf4B+ZJ1zeA4sLAi46MBG/FvBgtDOJxD39IX4CagWWY8XdNeMeD7YW9hcGhjaTTl+LPeerJb9F2oKxpH/GgrulQbNfw2zMmXOvrbYeawkKAWX/k1OPONTcT2ZQnYJX7va7O6OfNHlBFsbkEp+fO7/mgLyVZGdn7ztvLBshK4dc9KFVx3zexqb/Hmo3hgQdguroO7flZeI161cLJdS+azQ="
-    - BUILD_MODE=release
-    - BUILD_MODE=debug
+        - secure: "QuhX7bisRDa+sUluH9W3II5z8mawlhWjw4sHmgwDgdLC3EZNcZMSRLDzMuQVkMAUVRLJzwa2NYq8b/pO0f5vLcZHiFudtMJyy4+RgSP1aJv6Uz68cHH3EaMc7x95XBBtvFaunZZ4meSNM6kwzHwFWFievd2n14R461QMrPAIX1I69SPYRjiVAgqnXBGIPYNi8iOW70/+uvOl6fVIc4cSiVXi7JpIbQI3jvJFlJ3DcrJGn7gwH2VUbudwaSMeivrRaBH23w2rYbp2Y13qyfb1t3j8i0zWN3eqPRS+oaEBKvQ2KMbEJQxPAa7ZdxkwuReUZwVw8dJOmgzNSl8GY1QNfyijMh/hwG3AacelW1NCRl6Z8g1xr8xn0ZUmQOs5t1iYz+wHXNgyea22x8E8B9QP/pCP37MeW8Wm0yVm6ShqnsWx6AvVKSKV3UtAZaWhK0SM4lXe9ZTEPhYb62OP5upg1gqf4B+ZJ1zeA4sLAi46MBG/FvBgtDOJxD39IX4CagWWY8XdNeMeD7YW9hcGhjaTTl+LPeerJb9F2oKxpH/GgrulQbNfw2zMmXOvrbYeawkKAWX/k1OPONTcT2ZQnYJX7va7O6OfNHlBFsbkEp+fO7/mgLyVZGdn7ztvLBshK4dc9KFVx3zexqb/Hmo3hgQdguroO7flZeI161cLJdS+azQ="
+    matrix:
+        - BUILD_MODE=release
+        - BUILD_MODE=debug
 #  - "PATH=/home/travis/gopath/bin:$PATH"
 before_install:
 #    - go get github.com/ddliu/go-httpclient
