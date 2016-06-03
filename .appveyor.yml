@@ -57,7 +57,7 @@ build_script:
 version: Windows-g++-$(VERSION_NUMBER)-$(TIMESTAMP)
 artifacts:
   - path: Israfil\build-mingw
-    name: Israfil-$(GIT_TAG)
+    name: Israfil-Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
     #Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
 deploy:
   # Deploy to GitHub Releases
