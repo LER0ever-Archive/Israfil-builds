@@ -45,20 +45,14 @@ script:
     - make
     - ls -lRa .
     - mv bin Israfil
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx"]; then zip -r Israfil.zip Israfil
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux"]; then 7z a Israfil.zip Israfil
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx"]; then zip -r Israfil.zip Israfil; fi
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux"]; then 7z a Israfil.zip Israfil; fi
     - mv Israfil.zip ../../
     - cd ../../
 before_deploy:
     - export VERSION_NUMBER=`cat VERSION`
     - mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
-    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
-         export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING
-      ;
-    else
-         export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING
-      ;
-    fi
+    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
     - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
     - git push -q https://$TAGPERM@github.com/LER0ever/Israfil-build --tags
 deploy:
