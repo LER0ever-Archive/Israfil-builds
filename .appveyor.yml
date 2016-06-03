@@ -48,7 +48,9 @@ build_script:
  - ren bin Israfil
  - cd Israfil
  - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
- - set GIT_TAG=Windows-g++-%VERSION_NUMBER%
+ - FOR /f %%a IN ('WMIC OS GET LocalDateTime ^| FIND "."') DO SET DTS=%%a
+ - set TIMESTAMP=%DTS:~8,6%
+ - set GIT_TAG=Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
  - echo %GIT_TAG%
  - git tag %GIT_TAG% -a -m "Generated tag from Appveyor"
  - git push -q https://LER0ever:%GITHUB_API_KEY%@github.com/LER0ever/Israfil-builds --tags
