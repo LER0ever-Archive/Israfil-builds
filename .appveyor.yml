@@ -31,7 +31,7 @@ build_script:
  - cd build-mingw
  - qmake ..\Israfil.pro
  - for /f  %%i  in (..\..\VERSION) do (set VERSION_NUMBER=%%i)
- - echo $(VERSION_NUMBER)
+ - echo %VERSION_NUMBER%
  - mingw32-make
  - echo 'moving files to artifacts'
 # - move lib\* bin\
@@ -48,10 +48,10 @@ build_script:
  - ren bin Israfil
  - cd Israfil
  - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
- - set GIT_TAG=Windows-g++-$(VERSION_NUMBER)
- - echo GIT_TAG
- - git tag $(GIT_TAG) -a -m "Generated tag from Appveyor"
- - git push -q https://LER0ever:$(GITHUB_API_KEY)@github.com/LER0ever/Israfil-builds --tags
+ - set GIT_TAG=Windows-g++-%VERSION_NUMBER%
+ - echo %GIT_TAG%
+ - git tag %GIT_TAG% -a -m "Generated tag from Appveyor"
+ - git push -q https://LER0ever:%GITHUB_API_KEY%@github.com/LER0ever/Israfil-builds --tags
 # - windeployqt test-json.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-qqmusic.exe --qmldir C:\Qt\5.5\mingw492_32\qml
 # - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml
@@ -66,6 +66,6 @@ deploy:
     artifact: Israfil
     draft: false
     prerelease: false
-    auth_token: $(GITHUB_API_KEY)
+    auth_token: %GITHUB_API_KEY%
     on:
       branch: master
