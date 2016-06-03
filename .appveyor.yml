@@ -34,22 +34,17 @@ build_script:
  - echo %VERSION_NUMBER%
  - mingw32-make
  - echo 'moving files to artifacts'
-# - move lib\* bin\
-# - cd bin
-# - md plugins
-# - cd ..
-# - move plugins\* bin\plugins\
-# - move tests bin
-# - rd lib
-# - rd plugins
-# - rd /s /q src
-   # - rd /s /q tests
-# - del /q Makefile
- - ren bin Israfil
- - cd Israfil
- - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
  - FOR /f %%a IN ('WMIC OS GET LocalDateTime ^| FIND "."') DO SET DTS=%%a
  - set TIMESTAMP=%DTS:~8,6%
+ - ren bin Israfil
+ - rd /s /q IsrafilApp
+ - rd /s /q IsrafilCore
+ - rd /s /q tests
+ - del /q Makefile
+ - cd Israfil
+ - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+ - cd ../../../
+
  - set GIT_TAG=Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
  - echo %GIT_TAG%
  - git tag %GIT_TAG% -a -m "Generated tag from Appveyor"
@@ -59,9 +54,10 @@ build_script:
 # - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml
    # - cd release
 # - windeployqt --release HelloWorld.exe
+version: Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
 artifacts:
   - path: Israfil\build-mingw
-    name: Israfil
+    name: Israfil-Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
 deploy:
   # Deploy to GitHub Releases
   - provider: GitHub
