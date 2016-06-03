@@ -54,10 +54,10 @@ build_script:
 # - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml
    # - cd release
 # - windeployqt --release HelloWorld.exe
-version: Windows-g++-$(VERSION_NUMBER)-$(TIMESTAMP)
+version: Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
 artifacts:
   - path: Israfil\build-mingw
-    name: Israfil-Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
+    name: Israfil-$(GIT_TAG)
     #Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%
 deploy:
   # Deploy to GitHub Releases
