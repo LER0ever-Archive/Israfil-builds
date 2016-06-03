@@ -57,7 +57,7 @@ before_deploy:
 - git push -q https://LER0ever:$GITHUB_API_KEY@github.com/LER0ever/Israfil --tags
 deploy:
   provider: releases
-  api_key: 7022646b188aa7ad9b00e50bf3577cad82fc955e
+  api_key: 018869158f7b32eb12519b6360985ef66e6b2779
   file: Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
   skip_cleanup: true
   on:
