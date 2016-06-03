@@ -11,12 +11,14 @@ os:
     - osx
 
 env:
+    global:
+        secure: "QuhX7bisRDa+sUluH9W3II5z8mawlhWjw4sHmgwDgdLC3EZNcZMSRLDzMuQVkMAUVRLJzwa2NYq8b/pO0f5vLcZHiFudtMJyy4+RgSP1aJv6Uz68cHH3EaMc7x95XBBtvFaunZZ4meSNM6kwzHwFWFievd2n14R461QMrPAIX1I69SPYRjiVAgqnXBGIPYNi8iOW70/+uvOl6fVIc4cSiVXi7JpIbQI3jvJFlJ3DcrJGn7gwH2VUbudwaSMeivrRaBH23w2rYbp2Y13qyfb1t3j8i0zWN3eqPRS+oaEBKvQ2KMbEJQxPAa7ZdxkwuReUZwVw8dJOmgzNSl8GY1QNfyijMh/hwG3AacelW1NCRl6Z8g1xr8xn0ZUmQOs5t1iYz+wHXNgyea22x8E8B9QP/pCP37MeW8Wm0yVm6ShqnsWx6AvVKSKV3UtAZaWhK0SM4lXe9ZTEPhYb62OP5upg1gqf4B+ZJ1zeA4sLAi46MBG/FvBgtDOJxD39IX4CagWWY8XdNeMeD7YW9hcGhjaTTl+LPeerJb9F2oKxpH/GgrulQbNfw2zMmXOvrbYeawkKAWX/k1OPONTcT2ZQnYJX7va7O6OfNHlBFsbkEp+fO7/mgLyVZGdn7ztvLBshK4dc9KFVx3zexqb/Hmo3hgQdguroO7flZeI161cLJdS+azQ="
   - BUILD_MODE=release
   - BUILD_MODE=debug
 #  - "PATH=/home/travis/gopath/bin:$PATH"
 before_install:
 #    - go get github.com/ddliu/go-httpclient
-    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get -y install qt5-default p7zip; fi
+    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get -y install qt5-default p7zip-full; fi
 
     - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; fi
     - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install qt5; fi
@@ -51,10 +53,13 @@ script:
     - cd ../../
 before_deploy:
     - export VERSION_NUMBER=`cat VERSION`
+    - TIME_STRING=`date +%H%M%S`
+    - git config --global user.email "builds@travis-ci.com"
+    - git config --global user.name "Travis CI"
     - mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
     - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
     - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-    - git push -q https://$TAGPERM@github.com/LER0ever/Israfil-build --tags
+    - git push -q https://$GITAUTH@github.com/LER0ever/Israfil-build --tags
 deploy:
     provider: releases
     api_key: "7022646b188aa7ad9b00e50bf3577cad82fc955e"
