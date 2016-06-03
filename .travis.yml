@@ -45,8 +45,8 @@ script:
     - make
     - ls -lRa .
     - mv bin Israfil
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx"]; then zip -r Israfil.zip Israfil; fi
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux"]; then 7z a Israfil.zip Israfil; fi
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx" ]; then zip -r Israfil.zip Israfil; fi
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux" ]; then 7z a Israfil.zip Israfil; fi
     - mv Israfil.zip ../../
     - cd ../../
 before_deploy:
