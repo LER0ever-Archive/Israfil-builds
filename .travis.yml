@@ -14,7 +14,7 @@ env:
   - secure: gCmUz1yui692ArArhY8H3eFtuIH6CajEjZ5fiHNThdcrRfPpBcz8n72B4VfLWGidYNkOvofHO+NeJnqVIniTUR/sIM5ZoYxY2lV1ExJQHqYvpm5RO8ccOC4NaUvjra8L7O2wLeumOIrs8rgXLeDFUKn9qucn4d4F8ry21El5+/j/q4BSVomouV3PdSdzlg3SaCB0V1dpTp4QUw8Zp2b6F6brNQQ6Ss90ZHWjnyKnAG3nnaIPyStI0HEFgd5sibMpRjv52n0lXrDvsCVvk+jttfbZ8E5ghaDg0I8fWpF7fDk+RrTtDKTVpgKtQTaCQxL5Metv9kguCLAIZUhb4zi4l8A7CBYaBSiBatfPWOLzdvFRwdoeFLXwPeHuJUbKnQDRGATHryqEwe5LiDPAad1CDvHPMRljsVxcgnb5DTNegmHA6TL007T7myCy3ft51OuFF0Zr7UqA4fl96DMbn7G/OOjWpN3R6xFb6fvh/5ERAaM63amyTCR1o1L040wTQ1rbzGrm7E1euKjOeEjD9JGKIym/jrJKCyB25Q89Kef71ms+gYbpZahAncYn9ltyPepINt3nq8woPh4nBmujEJrNDP4aVdMiCKwjAc526G8o0istXOvDfTaC5LropMn/r6m7ZupEYwZLQ81kOZng24u4ZyJPLUA4huOs4WbyW9n2rhA=
   matrix:
   - BUILD_MODE=release
-  - BUILD_MODE=debug
+#  - BUILD_MODE=debug
 before_install:
 - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get
   -y install qt5-default p7zip-full; fi
@@ -23,7 +23,7 @@ before_install:
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then export PATH=$(brew --prefix)/opt/qt5/bin:$PATH;
   fi
 install:
-- if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "clang++" ]; then export MKSPEC=linux-clang;
+- if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "clang++" ]; then exit;
   fi
 - if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "g++" ]; then export MKSPEC=linux-g++;
   fi
@@ -50,15 +50,14 @@ before_deploy:
 - TIME_STRING=`date +%H%M%S`
 - git config --global user.email "builds@travis-ci.com"
 - git config --global user.name "Travis CI"
-- mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
-- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING
-  ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
+- mv Israfil.zip Israfil-$MKSPEC-$VERSION_NUMBER.zip
+- export GIT_TAG=$MKSPEC-$VERSION_NUMBER-$TIME_STRING
 - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
 - git push -q https://LER0ever:$GITHUB_API_KEY@github.com/LER0ever/Israfil-builds --tags
 deploy:
   provider: releases
   api_key: $GITHUB_API_KEY
-  file: Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
+  file: Israfil-$MKSPEC-$VERSION_NUMBER.zip
   skip_cleanup: true
   on:
     branch: master
