@@ -55,7 +55,7 @@ before_deploy:
 - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING
   ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
 - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-- git push -q origin --tags
+- git push -q https://LER0ever:$GITHUB_API_TOKEN@github.com/LER0ever/Israfil --tags
 deploy:
   provider: releases
   api_key: 7022646b188aa7ad9b00e50bf3577cad82fc955e
@@ -64,3 +64,4 @@ deploy:
   on:
     branch: master
     tags: false
+    condition: $BUILD_MODE=release
