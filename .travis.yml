@@ -1,6 +1,10 @@
 sudo: required
 dist: trusty
 language: cpp
+branches:
+  except:
+    - linux*
+    - macx*
 compiler:
 - clang
 - gcc
