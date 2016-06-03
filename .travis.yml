@@ -1,72 +1,66 @@
 sudo: required
 dist: trusty
 language: cpp
-
 compiler:
-    - clang
-    - gcc
-
+- clang
+- gcc
 os:
-    - linux
-    - osx
-
+- linux
+- osx
 env:
-    global:
-        - secure: "TPKpZT1ol+f8f7+r/4Il/jNNW1x/s/rZkTvaXkKWf3KUQrUpFAyYuCab+3YGypUmE6cRNPcwX6vwTUbyueC8Wt0pNdf60LvZczn3FSOU1YC/naNJIvE/i506RCrXdfNbuVTjK0ubUbcMJ2NyhGR7QLysHBfQfcEipkUvQkF5sEOQglHb1oCmJZeX/UFN7lc/hZT83z3mq9axx7ON3tGOBMHDieMYviwq881UIb6gzc934hqioxXOz9/3unAm5DrSHqUOwUGOJDm8iJmQzi21OZkmuo4aT2fhMu8dRW0KN3Oy8+xw8KJAgKDJPl0/a62CYgJXVeQM8HjiF4LK4P3yvIV1X6Jvt4LazxWcnpKomTnJdRMh3orHCd4+pwXXOB5JqkXVoM7eyrmKbGhqcSgIUmZAK7XotRPpGV+UmHREg4Z2TBMVQw4xXDfKjSJwK6aA3JO2cpxwQN4Tt0Wh4n9LTWy29KNpMX3eoiuFsbAYczgR4o76JfWVLl/kfbZbGETL97Zlp6EKdUqi32XD0d2hfPmJrcZXu8+xhUsN2rkTvrB/asBDKd/QT6urjyVLBcocLMvEnlbxdcgOwJTw87hG+PhxBkWO6MumW+5hfuoMZs6Fp56WcQW8I3x4atkhXE67PdUlPbMeHBqIy22fTD4TxS/Xn5v8dXoPzdZ/HmmvFpM="
-        - secure: "QuhX7bisRDa+sUluH9W3II5z8mawlhWjw4sHmgwDgdLC3EZNcZMSRLDzMuQVkMAUVRLJzwa2NYq8b/pO0f5vLcZHiFudtMJyy4+RgSP1aJv6Uz68cHH3EaMc7x95XBBtvFaunZZ4meSNM6kwzHwFWFievd2n14R461QMrPAIX1I69SPYRjiVAgqnXBGIPYNi8iOW70/+uvOl6fVIc4cSiVXi7JpIbQI3jvJFlJ3DcrJGn7gwH2VUbudwaSMeivrRaBH23w2rYbp2Y13qyfb1t3j8i0zWN3eqPRS+oaEBKvQ2KMbEJQxPAa7ZdxkwuReUZwVw8dJOmgzNSl8GY1QNfyijMh/hwG3AacelW1NCRl6Z8g1xr8xn0ZUmQOs5t1iYz+wHXNgyea22x8E8B9QP/pCP37MeW8Wm0yVm6ShqnsWx6AvVKSKV3UtAZaWhK0SM4lXe9ZTEPhYb62OP5upg1gqf4B+ZJ1zeA4sLAi46MBG/FvBgtDOJxD39IX4CagWWY8XdNeMeD7YW9hcGhjaTTl+LPeerJb9F2oKxpH/GgrulQbNfw2zMmXOvrbYeawkKAWX/k1OPONTcT2ZQnYJX7va7O6OfNHlBFsbkEp+fO7/mgLyVZGdn7ztvLBshK4dc9KFVx3zexqb/Hmo3hgQdguroO7flZeI161cLJdS+azQ="
-    matrix:
-        - BUILD_MODE=release
-        - BUILD_MODE=debug
-#  - "PATH=/home/travis/gopath/bin:$PATH"
+  global:
+  - secure: OvSuITCwilgERG6G0yvyHMUsjukpZFAfopnazFCmOKh54sS7TnDB2yB0pEMbbPH1UG3WCap2bGGySBvDErq633Ix7E1ZkisuLE3QiUo49zh+388giOc7oOdA6pqNJ75PYjnjHyz5zOxTodZq7rgkF4uLzYCSO7ek63WXMol1Rss1lI9DEOKHw4pFx/PCTRwGIoGWt3t8xP6LUji/sHUWTs9VULVYeTziJCb2LZMsDeo4YZoVzcaZ4WufFdZg3bklzW7flNU5rIVKki6jkWd+72A7QgNjkHpYzljFgBrCSZ7dhMjT1MFnCCA1tFIvTpAT9qlANqmlv9tprRltgtKkoNYq5hac6rbRHQLESk5MMYgwLclHISLut1Fp/QpMmmGArFlwu3Xhp9LoFSaD37n/olq955mQhXQYmWnN+NUfvL9OvOlyT3+E6avqOgPI54WYj9/B1bYbm/Zi9mhGcEAG5/AFtmY546vmhn09d50gPszYzb4MzBIEf2Dggc/NrTE1ZFBCqv9+xch5apJLOjrWJ8Ej75IJwes66MskvOUL/40u8FeWzYaJaq+lRtfR2uBSolko0s2OrmIDJ7BCUgJN8Xsb/joRUcBj9+JBjR4yVy6mSFrgXH/Pz+k8qqSdrufsQjZNJDdEPjoVdb2caY/IIXHiERFYBJGq5vSnp8x7mao=
+  - secure: En8/2jtdVEaHp2+S/NMGvfpWSDqY5NT/nE/VMlEuYDAv/blDvyU4R3ZDMufVrUxktd+oX+5TawqZcNFwKC7p3qsZas7S2IoK1bNSrrQhy9xmjGeleMX/SX0jJXv1zAFMi/I5cR38s95mjiyt1hWULMyyLLJjNEpX9ZmOOb7MMo2oPstzRJ1eN4D5G+qbSytYpM8xd/dfWbUufSUUjt3j/HK5JrJpNe3CBE3MlEyDbDeSeDnDjIzz5xaKKba6omfRzQvsgFVpNoJLl6D3or01S0ZgbsiHghdT1kSOvJHeC9FTqgeoZi1GPs2lFZ4HoDDNnrUkYMDzu+h42RrxlGizT3bcI/LvNJk+9AJmJRfeUAWQnEBNZuaucwr1cj67oX55D3gtaFIPMlQ4ZXjuV9Kws/IGKCR16T+h7mtESbyaF9WibGYMVHZAgI/50PZt3z3DVecGjZa96sYCNACTtRaC8qXp/WDxbAQG7uR5zbeqRKsZ9hX/5R2voJgwEn3XCwcEdhKZxv0Ap7dBTlQUiYKX0QpPQXxB5ZMfCwBQx45s8VfZtmSXf4dzy2AgYbBjyX0ieCBA7NxmW0T35HFn7Fyw0PMQwj3tX2ypah9mF/fWpXCIgfmR2jlcUyJXPoEDCAeFdkSZ5XfJAiIK6UCTTSvFutGrOJiUWVkyghhgmvOch0o=
+  - secure: gCmUz1yui692ArArhY8H3eFtuIH6CajEjZ5fiHNThdcrRfPpBcz8n72B4VfLWGidYNkOvofHO+NeJnqVIniTUR/sIM5ZoYxY2lV1ExJQHqYvpm5RO8ccOC4NaUvjra8L7O2wLeumOIrs8rgXLeDFUKn9qucn4d4F8ry21El5+/j/q4BSVomouV3PdSdzlg3SaCB0V1dpTp4QUw8Zp2b6F6brNQQ6Ss90ZHWjnyKnAG3nnaIPyStI0HEFgd5sibMpRjv52n0lXrDvsCVvk+jttfbZ8E5ghaDg0I8fWpF7fDk+RrTtDKTVpgKtQTaCQxL5Metv9kguCLAIZUhb4zi4l8A7CBYaBSiBatfPWOLzdvFRwdoeFLXwPeHuJUbKnQDRGATHryqEwe5LiDPAad1CDvHPMRljsVxcgnb5DTNegmHA6TL007T7myCy3ft51OuFF0Zr7UqA4fl96DMbn7G/OOjWpN3R6xFb6fvh/5ERAaM63amyTCR1o1L040wTQ1rbzGrm7E1euKjOeEjD9JGKIym/jrJKCyB25Q89Kef71ms+gYbpZahAncYn9ltyPepINt3nq8woPh4nBmujEJrNDP4aVdMiCKwjAc526G8o0istXOvDfTaC5LropMn/r6m7ZupEYwZLQ81kOZng24u4ZyJPLUA4huOs4WbyW9n2rhA=
+  matrix:
+  - BUILD_MODE=release
+  - BUILD_MODE=debug
 before_install:
-#    - go get github.com/ddliu/go-httpclient
-    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get -y install qt5-default p7zip-full; fi
-
-    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; fi
-    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install qt5; fi
-    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then export PATH=$(brew --prefix)/opt/qt5/bin:$PATH; fi
-
-      #    - go get gopkg.in/qml.v1
-
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get
+  -y install qt5-default p7zip-full; fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install qt5; fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" ]; then export PATH=$(brew --prefix)/opt/qt5/bin:$PATH;
+  fi
 install:
-    - if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "clang++" ]; then export MKSPEC=linux-clang; fi
-    - if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "g++" ]; then export MKSPEC=linux-g++; fi
-
-    - if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "clang++" ]; then export MKSPEC=macx-clang; fi
-    - if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "g++" ]; then exit; fi
-
-
+- if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "clang++" ]; then export MKSPEC=linux-clang;
+  fi
+- if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "g++" ]; then export MKSPEC=linux-g++;
+  fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "clang++" ]; then export MKSPEC=macx-clang;
+  fi
+- if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "g++" ]; then exit; fi
 script:
-#    - cd HttpAPI
-#    - ./build.sh
-#    - cd ..
-    - git clone https://github.com/LER0ever/Israfil.git
-    - cd Israfil
-    - echo "Building for ${MKSPEC} in ${BUILD_MODE} mode..."
-    - mkdir build
-    - cd build
-    - qmake ../Israfil.pro -spec ${MKSPEC} CONFIG+=${BUILD_MODE}
-    - make
-    - ls -lRa .
-    - mv bin Israfil
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx" ]; then zip -r Israfil.zip Israfil; fi
-    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux" ]; then 7z a Israfil.zip Israfil; fi
-    - mv Israfil.zip ../../
-    - cd ../../
+- git clone https://github.com/LER0ever/Israfil.git
+- cd Israfil
+- echo "Building for ${MKSPEC} in ${BUILD_MODE} mode..."
+- mkdir build
+- cd build
+- qmake ../Israfil.pro -spec ${MKSPEC} CONFIG+=${BUILD_MODE}
+- make
+- ls -lRa .
+- mv bin Israfil
+- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx" ]; then zip -r Israfil.zip
+  Israfil; fi
+- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux" ]; then 7z a Israfil.zip
+  Israfil; fi
+- mv Israfil.zip ../../
+- cd ../../
 before_deploy:
-    - export VERSION_NUMBER=`cat VERSION`
-    - TIME_STRING=`date +%H%M%S`
-    - git config --global user.email "builds@travis-ci.com"
-    - git config --global user.name "Travis CI"
-    - mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
-    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
-    - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
-    - git push -q https://$GITAUTH@github.com/LER0ever/Israfil-build --tags
+- export VERSION_NUMBER=`cat VERSION`
+- TIME_STRING=`date +%H%M%S`
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING
+  ; else export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING ; fi
+- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+- git push -q origin --tags
 deploy:
-    provider: releases
-    api_key: "7022646b188aa7ad9b00e50bf3577cad82fc955e"
-    file: Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
-    skip_cleanup: true
-    on:
-        branch: master
-        tags: false
+  provider: releases
+  api_key: 7022646b188aa7ad9b00e50bf3577cad82fc955e
+  file: Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
+  skip_cleanup: true
+  on:
+    branch: master
+    tags: false
