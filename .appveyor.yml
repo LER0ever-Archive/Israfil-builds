@@ -65,6 +65,6 @@ deploy:
     artifact: Israfil
     draft: false
     prerelease: false
-    auth_token: %GITHUB_API_KEY
+    auth_token: GITHUB_API_KEY
     on:
       branch: master
