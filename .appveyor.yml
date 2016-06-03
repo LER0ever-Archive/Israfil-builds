@@ -1,0 +1,51 @@
+os: unstable
+#atrix:
+# - build: msvc2015
+#   QTDIR:
+#   make: nmake release
+install:
+# - set QTDIR=C:\Qt\5.5\mingw492_32
+ - set QTDIR=C:\Qt\5.5\mingw492_32
+# - set PATH=%PATH%;%QTDIR%\bin
+ - set PATH=%PATH%;C:\Qt\5.5\mingw492_32\bin;C:\Qt\Tools\mingw492_32\bin
+build_script:
+# - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
+ - 'echo Downloading Slibcurl ...'
+ - appveyor DownloadFile https://curl.haxx.se/download/curl-7.49.1.zip -FileName curl.zip
+ - 7z x curl.zip
+ - cd curl*
+ - dir
+# - md build
+# - cd build
+# - cmake .. -G"MinGW Makefiles"
+ - mingw32-make mingw32
+ - xcopy include C:\Qt\5.5\mingw492_32\include /e
+ - xcopy lib\libcurl.dll C:\Qt\5.5\mingw492_32\lib /e
+ - cd ../
+ - md build-mingw
+ - cd build-mingw
+ - qmake ..\Israfil.pro
+ - mingw32-make
+ - echo 'moving files to artifacts'
+# - move lib\* bin\
+# - cd bin
+# - md plugins
+# - cd ..
+# - move plugins\* bin\plugins\
+# - move tests bin
+# - rd lib
+# - rd plugins
+# - rd /s /q src
+   # - rd /s /q tests
+# - del /q Makefile
+ - ren bin Israfil
+ - cd Israfil
+ - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+# - windeployqt test-json.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+# - windeployqt test-qqmusic.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+# - windeployqt test-network.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+   # - cd release
+# - windeployqt --release HelloWorld.exe
+artifacts:
+  - path: build-mingw
+    name: Israfil

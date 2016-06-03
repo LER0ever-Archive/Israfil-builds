@@ -1,0 +1,71 @@
+sudo: required
+dist: trusty
+language: cpp
+
+compiler:
+    - clang
+    - gcc
+
+os:
+    - linux
+    - osx
+
+env:
+  - BUILD_MODE=release
+  - BUILD_MODE=debug
+#  - "PATH=/home/travis/gopath/bin:$PATH"
+before_install:
+#    - go get github.com/ddliu/go-httpclient
+    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get -y install qt5-default p7zip; fi
+
+    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; fi
+    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install qt5; fi
+    - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then export PATH=$(brew --prefix)/opt/qt5/bin:$PATH; fi
+
+      #    - go get gopkg.in/qml.v1
+
+install:
+    - if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "clang++" ]; then export MKSPEC=linux-clang; fi
+    - if [ "${TRAVIS_OS_NAME}" = "linux" -a "${CXX}" = "g++" ]; then export MKSPEC=linux-g++; fi
+
+    - if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "clang++" ]; then export MKSPEC=macx-clang; fi
+    - if [ "${TRAVIS_OS_NAME}" = "osx" -a "${CXX}" = "g++" ]; then exit; fi
+
+
+script:
+#    - cd HttpAPI
+#    - ./build.sh
+#    - cd ..
+    - git clone https://github.com/LER0ever/Israfil.git
+    - cd Israfil
+    - echo "Building for ${MKSPEC} in ${BUILD_MODE} mode..."
+    - mkdir build
+    - cd build
+    - qmake ../Israfil.pro -spec ${MKSPEC} CONFIG+=${BUILD_MODE}
+    - make
+    - ls -lRa .
+    - mv bin Israfil
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx"]; then zip -r Israfil.zip Israfil
+    - if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux"]; then 7z a Israfil.zip Israfil
+    - mv Israfil.zip ../../
+    - cd ../../
+before_deploy:
+    - export VERSION_NUMBER=`cat VERSION`
+    - mv Israfil.zip Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
+    - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then
+         export GIT_TAG=linux-$VERSION_NUMBER-$TIME_STRING
+      ;
+    else
+         export GIT_TAG=macosx-$VERSION_NUMBER-$TIME_STRING
+      ;
+    fi
+    - git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+    - git push -q https://$TAGPERM@github.com/LER0ever/Israfil-build --tags
+deploy:
+    provider: releases
+    api_key: "7022646b188aa7ad9b00e50bf3577cad82fc955e"
+    file: Israfil-$TRAVIS_OS_NAME-$VERSION_NUMBER.zip
+    skip_cleanup: true
+    on:
+        branch: master
+        tags: false
