@@ -2,9 +2,8 @@ sudo: required
 dist: trusty
 language: cpp
 branches:
-  except:
-    - linux*
-    - macx*
+  only:
+    - master
 compiler:
 - clang
 - gcc
