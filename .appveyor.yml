@@ -62,7 +62,7 @@ artifacts:
 deploy:
   # Deploy to GitHub Releases
   - provider: GitHub
-    artifact: Israfil
+    artifact: Israfil-$(GIT_TAG)
     draft: false
     prerelease: false
     auth_token: $(GITHUB_API_KEY)
