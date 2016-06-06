@@ -26,6 +26,7 @@ build_script:
  - mingw32-make mingw32
  - xcopy include C:\Qt\5.5\mingw492_32\include /e
  - xcopy lib\libcurl.dll C:\Qt\5.5\mingw492_32\lib /e
+ - xcopy lib\libcurl.dll ..\ /e
  - cd ../
  - md build-mingw
  - cd build-mingw
@@ -42,6 +43,7 @@ build_script:
  - rd /s /q tests
  - del /q Makefile
  - cd Israfil
+ - xcopy ..\..\libcurl.dll .
  - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
  - cd ../../../
 
