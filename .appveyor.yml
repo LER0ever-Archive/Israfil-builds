@@ -15,6 +15,7 @@ build_script:
 # - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
  - git clone https://github.com/LER0ever/Israfil.git
  - cd Israfil
+ - git submodule update --init --recursive
  - 'echo Downloading Slibcurl ...'
  - appveyor DownloadFile https://curl.haxx.se/download/curl-7.49.1.zip -FileName curl.zip
  - 7z x curl.zip

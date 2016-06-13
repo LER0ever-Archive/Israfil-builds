@@ -36,6 +36,7 @@ install:
 script:
 - git clone https://github.com/LER0ever/Israfil.git
 - cd Israfil
+- git submodule update --init --recursive
 - echo "Building for ${MKSPEC} in ${BUILD_MODE} mode..."
 - mkdir build
 - cd build
