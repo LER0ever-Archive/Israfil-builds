@@ -8,9 +8,9 @@ branches:
 #   make: nmake release
 install:
 # - set QTDIR=C:\Qt\5.5\mingw492_32
- - set QTDIR=C:\Qt\5.5\mingw492_32
+ - set QTDIR=C:\Qt\5.7\mingw53_32
 # - set PATH=%PATH%;%QTDIR%\bin
- - set PATH=%PATH%;C:\Qt\5.5\mingw492_32\bin;C:\Qt\Tools\mingw492_32\bin
+ - set PATH=%PATH%;C:\Qt\5.7\mingw53_32\bin;C:\Qt\Tools\mingw530_32\bin
 build_script:
 # - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
  - git clone https://github.com/LER0ever/Israfil.git
@@ -25,8 +25,8 @@ build_script:
 # - cd build
 # - cmake .. -G"MinGW Makefiles"
  - mingw32-make mingw32
- - xcopy include C:\Qt\5.5\mingw492_32\include /e
- - xcopy lib\libcurl.dll C:\Qt\5.5\mingw492_32\lib /e
+ - xcopy include C:\Qt\5.7\mingw53_32\include /e
+ - xcopy lib\libcurl.dll C:\Qt\5.7\mingw53_32\lib /e
  - xcopy lib\libcurl.dll ..\ /e
  - cd ../
  - md build-mingw
@@ -39,13 +39,14 @@ build_script:
  - FOR /f %%a IN ('WMIC OS GET LocalDateTime ^| FIND "."') DO SET DTS=%%a
  - set TIMESTAMP=%DTS:~8,6%
  - ren bin Israfil
+ - rd /s /q doc
  - rd /s /q IsrafilApp
  - rd /s /q IsrafilCore
  - rd /s /q tests
  - del /q Makefile
  - cd Israfil
  - xcopy ..\..\libcurl.dll .
- - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.5\mingw492_32\qml
+ - windeployqt IsrafilApp.exe --qmldir C:\Qt\5.7\mingw53_32\qml
  - cd ../../../
 
  - set GIT_TAG=Windows-g++-%VERSION_NUMBER%-%TIMESTAMP%

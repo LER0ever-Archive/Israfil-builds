@@ -10,3 +10,5 @@ Releases里标签名称为“平台-编译器-版本号-时间戳”， 如macx-
 | Windows g++ | Linux g++ | OS X Clang |
 | :---: | :---: | :---: |
 | ![appveyor](https://ci.appveyor.com/api/projects/status/t8ry0hmnriu0ncx1?svg=true)|![travis](https://api.travis-ci.org/LER0ever/Israfil-builds.svg)|![travis](https://api.travis-ci.org/LER0ever/Israfil-builds.svg)|
+
+OSX的自动编译暂停，因为我没有办法通过命令行安装Qt5.7，等待Brew支持5.7的安装。

@@ -5,11 +5,11 @@ branches:
   only:
     - master
 compiler:
-- clang
+#- clang
 - gcc
 os:
 - linux
-- osx
+#- osx
 env:
   global:
   - secure: OvSuITCwilgERG6G0yvyHMUsjukpZFAfopnazFCmOKh54sS7TnDB2yB0pEMbbPH1UG3WCap2bGGySBvDErq633Ix7E1ZkisuLE3QiUo49zh+388giOc7oOdA6pqNJ75PYjnjHyz5zOxTodZq7rgkF4uLzYCSO7ek63WXMol1Rss1lI9DEOKHw4pFx/PCTRwGIoGWt3t8xP6LUji/sHUWTs9VULVYeTziJCb2LZMsDeo4YZoVzcaZ4WufFdZg3bklzW7flNU5rIVKki6jkWd+72A7QgNjkHpYzljFgBrCSZ7dhMjT1MFnCCA1tFIvTpAT9qlANqmlv9tprRltgtKkoNYq5hac6rbRHQLESk5MMYgwLclHISLut1Fp/QpMmmGArFlwu3Xhp9LoFSaD37n/olq955mQhXQYmWnN+NUfvL9OvOlyT3+E6avqOgPI54WYj9/B1bYbm/Zi9mhGcEAG5/AFtmY546vmhn09d50gPszYzb4MzBIEf2Dggc/NrTE1ZFBCqv9+xch5apJLOjrWJ8Ej75IJwes66MskvOUL/40u8FeWzYaJaq+lRtfR2uBSolko0s2OrmIDJ7BCUgJN8Xsb/joRUcBj9+JBjR4yVy6mSFrgXH/Pz+k8qqSdrufsQjZNJDdEPjoVdb2caY/IIXHiERFYBJGq5vSnp8x7mao=
@@ -19,8 +19,7 @@ env:
   - BUILD_MODE=release
 #  - BUILD_MODE=debug
 before_install:
-- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-get -y update -qq && sudo apt-get
-  -y install qt5-default p7zip-full; fi
+- if [ "${TRAVIS_OS_NAME}" = "linux" ]; then sudo apt-add-repository --yes ppa:beineri/opt-qt57-trusty && sudo apt-get -y update -qq && sudo apt-get -y install qt57-meta-full p7zip && source /opt/qt57/bin/qt57-env.sh; fi
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew update; fi
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then brew install qt5; fi
 - if [ "${TRAVIS_OS_NAME}" = "osx" ]; then export PATH=$(brew --prefix)/opt/qt5/bin:$PATH;
@@ -44,10 +43,8 @@ script:
 - make
 - ls -lRa .
 - mv bin Israfil
-- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx" ]; then zip -r Israfil.zip
-  Israfil && mv Israfil.zip ../../; fi
-- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux" ]; then 7z a Israfil.zip
-  Israfil && mv Israfil.zip ../../; fi
+- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "osx" ]; then zip -r Israfil.zip Israfil && mv Israfil.zip ../../; fi
+- if [ "${BUILD_MODE}" = release -a "${TRAVIS_OS_NAME}" = "linux" ]; then 7z a Israfil.zip Israfil && mv Israfil.zip ../../; fi
 - cd ../../
 before_deploy:
 - export VERSION_NUMBER=`cat VERSION`
